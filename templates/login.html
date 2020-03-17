@@ -1,0 +1,37 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>用户登录</title>
+    <link rel="stylesheet" href="{% static 'plugin/layui/css/layui.css' %}">
+    <link rel="stylesheet" href="{% static 'css/common.css' %}">
+    <link rel="stylesheet" href="{% static 'css/mobile.css' %}">
+</head>
+<body>
+<div class="login-bg subject-color layui-row"></div>
+<form action="" method="post">{% csrf_token %}
+    <div class="login-box">
+
+        <div class="login-form">
+            <p>用户名：</p>
+            <input type="text" name="username" placeholder="登录用户名" class="layui-input">
+        </div>
+
+        <div class="login-form">
+            <input type="password" name="password" placeholder="请输入密码" class="layui-input">
+        </div>
+
+
+        <div class="login-form">
+            <button class="layui-btn layui-btn-fluid layui-btn-normal ">登录</button>
+        </div><br>
+        <div class="login-form">
+            <a href="/user/register" class="layui-btn layui-btn-fluid">注册</a>
+        </div><br>
+        {{ errmsg }}
+    </div>
+</form>
+</body>
+</html>

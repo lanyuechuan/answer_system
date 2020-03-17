@@ -1,0 +1,57 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>用户注册</title>
+    <link rel="stylesheet" href="{% static 'plugin/layui/css/layui.css' %}">
+    <link rel="stylesheet" href="{% static 'css/common.css' %}">
+    <link rel="stylesheet" href="{% static 'css/mobile.css' %}">
+</head>
+<body>
+<div class="login-bg subject-color layui-row"></div>
+<div class="login-box">
+    <div class="login-title layui-row">
+        <h2>注册</h2>
+    </div>
+    <p class="login-form">
+            <a href="/user/login" ><strong>已有帐号？点击登录</strong></a>
+    </p><br>
+    <div class="hr-line-div"></div>
+    <form action="" method="post">{% csrf_token %}
+        <div class="login-form">
+            <p>用户名：</p>
+            <div class="layui-row row-align">
+                <div class="valicode-box" style="width: 60%;">
+                    <input type="text" name="username" placeholder="请输入用户名" class="layui-input">
+                </div>
+            </div>
+        </div>
+
+        <div class="login-form">
+            <p>手机号码：</p>
+            <div class="layui-row row-align">
+                <div class="valicode-box" style="width: 60%;">
+                    <input type="text" name="mobile" placeholder="请输入手机号" class="layui-input">
+                </div>
+            </div>
+        </div>
+
+        <div class="login-form">
+            <p>密码：</p>
+            <input type="password" name="password" placeholder="至少八位，必须包含大小写字母及数字" class="layui-input">
+        </div>
+        <div class="login-form">
+            <p>确认密码：</p>
+            <input type="password" name='cpassword' placeholder="请再次输入密码" class="layui-input">
+        </div>
+
+        <div class="login-form">
+            <button class="layui-btn layui-btn-fluid">立即注册</button>
+        </div>
+    </form><br>
+    {{ errmsg }}
+</div>
+</body>
+</html>

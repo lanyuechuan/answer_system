@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>请回答</title>
+</head>
+<body>
+<h1>{{ type_obj.type }}题目如下:</h1>
+   {% if request.user.is_authenticated %}
+        欢迎您：<strong>{{ request.user.username }}</strong>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/user/logout">注销</a>
+    {% else %}
+        <a href="/user/login">登录</a>&nbsp;&nbsp;&nbsp;<a href="/user/register">注册</a>
+    {% endif %}<br><br>
+题目如下：<br>
+<ul>
+    <form method="post" action="/answer">{% csrf_token %}
+        <input type="hidden" name="type_id" value={{ type_id }}>
+        <ul>
+            {% for sub,sub_options in dict.items %}
+                {% if sub.sub_type %}
+                    <p><li>{{ sub.sub }}(多选){{ sub.sub_score }}分</li></p>
+                        {% for sub_option in sub_options %}
+        {#                        <p>{{ sub_option.option }}<input type="checkbox" name={{ sub.sub }} value={{ sub_option.option }}></p>#}
+                            {{ sub_option.option }}<input type="checkbox" name={{ sub.sub }} value={{ sub_option.option }}>
+                        {% endfor %}
+                {% else %}
+                    <p><li>{{ sub.sub }}(单选){{ sub.sub_score }}分</li></p>
+                        {% for sub_option in sub_options %}
+                            {{ sub_option.option }}<input type="radio" name={{ sub.sub }} value={{ sub_option.option }}>
+                        {% endfor %}
+                {% endif %}
+            {% endfor %}
+        </ul><br><br>
+        <input type="submit" id="lan" value="提交答案">
+    </form><br><br>
+    {{ msg }}
+<h3><a href={% url "subject:index" %}>回到首页继续答题</a></h3>
+</ul>
+<script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js">
+</script>
+<script>
+$(document).ready(function(){
+  $("#lan").click(function(){
+    $("#lan").hide();
+  });
+});
+</script>
+</body>
+</html>

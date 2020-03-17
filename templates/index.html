@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>答题系统</title>
+</head>
+<body>
+    {% if request.user.is_authenticated %}
+        欢迎您：<strong>{{ request.user.username }}</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/user/logout">注销</a>
+    {% else %}
+        <a href="/user/login">登录</a>&nbsp;&nbsp;&nbsp;<a href="/user/register">注册</a>
+    {% endif %}
+<ul><br>
+    <p>答题排行榜：</p>
+    {% for user in users %}
+       <li>{{ user }}({{ user.score }})</li>
+    {% endfor %}
+</ul>
+<ul>
+    {% for type in types %}
+       <li><a href="/sub/{{ type.id }}">{{ type.type }}</a></li>
+    {% endfor %}
+</ul>
+
+</body>
+</html>
